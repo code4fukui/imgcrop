@@ -1,4 +1,3 @@
-import { encode, decode } from "./ImageDataUtil.js";
 import { makeImagesForInsta } from "./cropImageInsta.js";
 
 if (Deno.args.length == 0) {
