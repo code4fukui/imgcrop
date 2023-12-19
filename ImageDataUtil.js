@@ -1,3 +1,6 @@
+import { PNG } from "https://code4fukui.github.io/PNG/PNG.js";
+import { JPEG } from "https://code4fukui.github.io/JPEG/JPEG.js";
+
 export const crop = (imgd, x, y, w, h) => {
   x = parseInt(x);
   y = parseInt(y);
@@ -15,4 +18,24 @@ export const crop = (imgd, x, y, w, h) => {
     }
   }
   return { data: d, width: w, height: h };
+};
+
+export const decode = async (fn, bin) => {
+  if (!(bin instanceof Uint8Array)) {
+    bin = new Uint8Array(bin);
+  }
+  if (fn.endsWith(".png")) {
+    return PNG.decode(bin);
+  } else if (fn.endsWith(".jpg")) {
+    return JPEG.decode(bin);
+  }
+  throw new Exception("unsupported extension");
+};
+export const encode = (img, fn) => {
+  if (fn.endsWith(".png")) {
+    return PNG.encode(img);
+  } else if (fn.endsWith(".jpg")) {
+    return JPEG.encode(img);
+  }
+  throw new Exception("unsupported extension");
 };
